@@ -29,7 +29,7 @@ public Plugin myinfo =
 	name = "[Executes] Bombsite HUD",
 	author = "B3none",
 	description = "Bombsite HUD for executes.",
-	version = "1.0.0",
+	version = "1.1.0",
 	url = "https://github.com/b3none/executes-hud"
 };
 
@@ -74,16 +74,14 @@ public Action displayHud(Handle timer)
 	
 	for (int i = 1; i <= MaxClients; i++)
 	{
-		if (!IsValidClient(i))
+		if (!IsValidClient(i) || GetClientTeam(i) == CS_TEAM_CT)
 		{
 			continue;
 		}
 		
-		int clientTeam = GetClientTeam(i);
-		
 		SetHudTextParams(xcord, ycord, holdtime, red, green, blue, 255, 0, 0.25, fadein, fadeout);
 		
-		ShowHudText(i, 5, "%s Bombsite: %s", clientTeam == CS_TEAM_CT ? "Defend" : "Execute", (bombsite == BombsiteA) ? "A" : "B");
+		ShowHudText(i, 5, "Execute Bombsite: %s", (bombsite == BombsiteA) ? "A" : "B");
 	}
 }
 
